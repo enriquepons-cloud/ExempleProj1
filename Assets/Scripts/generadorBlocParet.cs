@@ -6,7 +6,7 @@ public class generadorBlocParet : MonoBehaviour
     private const float LIMIT_DRET = 7f;
     private const float LIMIT_INFERIOR = -1f;
     private const float LIMIT_SUPERIOR = 7f;
-    private const float LIMIT_POSTERIOR = 90f;
+    private const float LIMIT_POSTERIOR = 5f;
 
     public GameObject prefabBlocParet;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,7 +21,7 @@ public class generadorBlocParet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void GenerarBlocsParets()
     {

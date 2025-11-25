@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class blockParet : MonoBehaviour
+public class generarBala : MonoBehaviour
 {
-    private float vel = 30f;
-    private const float LIMIT_Z_NEGATIU = -12f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float vel = 30f;
+    private const float LIMIT_Z_POSITIU = 30f;
     void Start()
     {
 
@@ -14,12 +14,12 @@ public class blockParet : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(
-            transform.position.x,
-            transform.position.y,
-            transform.position.z + vel * Time.deltaTime
-        );
+           transform.position.x,
+           transform.position.y,
+           transform.position.z + vel * Time.deltaTime
+       );
         //mirem si sur te la pantalla(camera)
-        if (transform.position.z < LIMIT_Z_NEGATIU)
+        if (transform.position.z > LIMIT_Z_POSITIU)
         {
             Destroy(gameObject);
         }

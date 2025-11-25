@@ -1,18 +1,25 @@
 using System;
+using JetBrains.Annotations;
 using OpenCover.Framework.Model;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class jugador : MonoBehaviour
 {
     public float vel = 10f;
+    private int numEscuts = 3;
     private Camera camera;
     private Vector3 limitInferiorEsquerra;
     private Vector3 limitSuperiorDret;
-    public GameObject Jugador;
+   // public GameObject Jugador;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("UI")]
+    public TextMeshProUGUI textEscuts;
     void Start()
     {
         camera = Camera.main;
+        textEscuts.text = "vidas " + numEscuts.ToString();
         //trobem la distancia entre la camera i l'objecte que no volem que surti
         // del viewport en les z's.
         float distanciaZCameraNau = Mathf.Abs(transform.position.z - camera.transform.position.z);
@@ -39,7 +46,7 @@ public class jugador : MonoBehaviour
             vel * direccio.x * Time.deltaTime,
             vel * direccio.y * Time.deltaTime,
             vel * direccio.z * Time.deltaTime);
-       
+
         //apliquem el vector desplaçament a l'objecte.
         transform.position += nouDesplacament;
     }
@@ -55,5 +62,29 @@ public class jugador : MonoBehaviour
         novaPos.x = Math.Clamp(novaPos.x, limitInferiorEsquerra.x, limitSuperiorDret.x);
         novaPos.y = Math.Clamp(novaPos.y, limitInferiorEsquerra.y, limitSuperiorDret.y);
         transform.position = novaPos;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "enemic")
+        {
+            DecrementarVides(1);
+            if (numEscuts == 0)
+            {
+                Destroy(gameObject);
+            }
+
+        }
+    }
+    public void IncrementarVides(int videsPerIncrementar)
+    {
+        numEscuts += videsPerIncrementar;
+    }
+    public void DecrementarVides(int videsPerVaixar)
+    {
+        numEscuts -= videsPerVaixar;
+    }
+    public void ActualitzarText()
+    {
+        
     }
 }
